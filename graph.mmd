@@ -1,0 +1,38 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	intake(intake)
+	classifier(classifier)
+	rebooking_agent(rebooking_agent)
+	tools(tools)
+	refund_agent(refund_agent)
+	compensation_agent(compensation_agent)
+	policy_checker(policy_checker)
+	escalation(escalation)
+	final_response(final_response)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> intake;
+	classifier -. &nbsp;compensation&nbsp; .-> compensation_agent;
+	classifier -. &nbsp;complaint&nbsp; .-> escalation;
+	classifier -. &nbsp;rebook&nbsp; .-> rebooking_agent;
+	classifier -. &nbsp;refund&nbsp; .-> refund_agent;
+	compensation_agent --> policy_checker;
+	escalation --> final_response;
+	intake --> classifier;
+	policy_checker -.-> compensation_agent;
+	policy_checker -.-> escalation;
+	policy_checker -.-> final_response;
+	policy_checker -.-> rebooking_agent;
+	policy_checker -.-> refund_agent;
+	rebooking_agent -. &nbsp;__end__&nbsp; .-> policy_checker;
+	rebooking_agent -.-> tools;
+	refund_agent --> policy_checker;
+	tools --> rebooking_agent;
+	final_response --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

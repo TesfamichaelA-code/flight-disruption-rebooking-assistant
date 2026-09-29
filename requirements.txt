@@ -1,0 +1,5 @@
+langgraph>=1.2
+langchain>=1.4
+langchain-core>=1.6
+langchain-groq>=1.1
+python-dotenv>=1.0
